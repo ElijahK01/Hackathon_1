@@ -1,7 +1,21 @@
 package items;
 
 public class Rope extends Item{
-
+	
+	private double density;
+	private double tensileStrength;
+	private double shearStrength;
+	private double compressionStrength = 0;
+	private double length;
+	
+	public Rope(int strandCount, double l, MaterialProperties m) {
+		density = m.getDensity();
+		tensileStrength = m.getTensileStrength();
+		shearStrength = m.getShearStrength();
+		compressionStrength = m.getShearStrength();
+		length = l;
+	}
+	
 	@Override
 	public double getDensity() {
 		// TODO Auto-generated method stub
@@ -21,9 +35,9 @@ public class Rope extends Item{
 	}
 
 	@Override
-	public double getTensionStrength() {
+	public double getCompresionStrength() {
 		// TODO Auto-generated method stub
-		return 0;
+		return compressionStrength;
 	}
 
 	@Override
@@ -34,14 +48,13 @@ public class Rope extends Item{
 
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public double getLength() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double getLength() 
+	{
+		return length;
 	}
 
 }
