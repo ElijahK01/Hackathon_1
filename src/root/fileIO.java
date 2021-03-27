@@ -6,7 +6,10 @@ import items.*;
 
 public class fileIO
 {
-	public MaterialProperties getMaterial(String name) throws Exception
+	//file location, can be changed 
+	static String fname = "C:\\Users\\schei\\Documents\\College\\Hackathon\\Mat.txt";
+	
+	public static MaterialProperties getMaterial(String name) throws Exception
 	{
 		File file;
 		Scanner s;
@@ -15,7 +18,7 @@ public class fileIO
 		double d = 0, ts = 0, ss = 0, cs = 0;
 		try
 		{
-			file = new File("C:\\Users\\schei\\Documents\\College\\Hackathon\\Mat.txt");
+			file = new File(fname);
 			s = new Scanner(file);
 		}
 		catch(Exception e)
@@ -26,7 +29,7 @@ public class fileIO
 		
 		String input;
 			
-		while(name.equals(s.next()))
+		while(!name.equals(s.next()))
 		{
 			//this is a loop to find the the correct material in the file.
 			//this loop needs no code, so I will continue to write paragraphs of text.
@@ -57,18 +60,81 @@ public class fileIO
 		return m;
 	}
 	
-	public static ArrayList<MaterialProperties> getAll()
+	public static ArrayList<MaterialProperties> getAll() throws Exception
 	{
+		File file;
+		ArrayList<MaterialProperties> all = new ArrayList<>();
+		Scanner s;
+		String in, n = "";
+		double d = 0, ts = 0, ss = 0, cs = 0;
+		int cnt = 0;
+		try
+		{
+			file = new File(fname);
+			s = new Scanner(file);
+		}
+		catch(Exception e)
+		{
+			System.out.println("I have done an oopsie! 1");
+			throw e;
+		}
 		
-		return null;
+		while(s.hasNext())
+		{
+			if(cnt == 0)
+				n = s.next();
+			else
+			{
+				in = s.next();
+				
+				if(cnt == 1)
+					d = StoD(in);
+				else if(cnt == 2)
+					ts = StoD(in);
+				else if(cnt == 3)
+					ss = StoD(in);
+				else
+					cs = StoD(in);
+			}
+			if(cnt == 4)
+			{
+				MaterialProperties m = new MaterialProperties(n, d, ts, ss, cs);
+				all.add(m);
+				cnt = 0;
+			}
+			else
+				cnt ++;
+			
+		}
+		s.close();
+		
+		return all;
 	}
 	
-	public void write(MaterialProperties m)
+	public void write(MaterialProperties m) throws Exception
 	{
-		
+		try {
+	         File file = new File(fname);
+	        
+	         FileWriter fw = new FileWriter(file.getAbsoluteFile());
+	         BufferedWriter bw = new BufferedWriter(fw);
+	         
+	         String s = "\n" + m.getName() + " " + m.getDensity() + " " + m.getTensileStrength() +
+	        		 " " + m.getShearStrength() + " " + m.getCompressionStrength();
+	         
+	         bw.write(s);
+	         bw.close();
+	         
+	         //System.out.println("Done");
+	      } 
+		catch (IOException e)
+		{
+			System.out.println("I have done an oopsie! 1");
+			throw e;
+	    } 
 	}
 	
-	public double StoD(String s)
+	public static double StoD(String s)
 	{
 		int pAt = s.length();
 		double d = 0;
