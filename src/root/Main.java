@@ -1,8 +1,10 @@
 package root;
 
-public class Main implements Runnable{
+public class Main implements Runnable
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		Main m = new Main();
 		Thread mainThread = new Thread(m);
 		
@@ -10,9 +12,8 @@ public class Main implements Runnable{
 	}
 
 	@Override
-	public void run() {
-		
+	public void run() 
+	{
 		
 	}
-
 }

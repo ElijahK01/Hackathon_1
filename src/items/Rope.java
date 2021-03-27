@@ -29,6 +29,13 @@ public class Rope extends Item{
 		}
 	}
 	
+	public double getArea()
+	{
+		double PI = 3.14159265;
+		double r = girth / 2;
+		return r * r * PI;
+	}
+	
 	public double getTotalForce() {
 		return totalForce;
 	}
