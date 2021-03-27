@@ -40,7 +40,7 @@ public class MaterialProperties implements Material{
 	}
 
 	@Override
-	public double getCompresionStrength() {
+	public double getCompressionStrength() {
 		return compressionStrength;
 	}
 	

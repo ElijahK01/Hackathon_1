@@ -2,40 +2,72 @@ package items;
 
 public class N_Gon extends Bar
 {
+	private int numSides;
+	
+	public N_Gon()
+	{
+		apothem = 1;
+		length = 10;
+		density = 1;
+		numSides = 4;
+		cStrength = 1;
+		sStrength = 1;
+		tStrength = 1;
+		name = "Unknown Material";
+		//get material properties
+	}
+	
+	public N_Gon(double r, double l, int nS, MaterialProperties prop)
+	{
+		apothem = r;
+		length = l;
+		numSides = nS;
+		cStrength = prop.getCompressionStrength();
+		sStrength = prop.getShearStrength();
+		tStrength = prop.getTensileStrength();
+		density = prop.getDensity();
+		name = prop.getName();
+	}
+	
 	@Override
 	public double getDensity() {
 		// TODO Auto-generated method stub
-		return 0;
+		return density;
 	}
 
 	@Override
 	public double getTensileStrength() {
 		// TODO Auto-generated method stub
-		return 0;
+		return tStrength;
 	}
 
 	@Override
 	public double getShearStrength() {
 		// TODO Auto-generated method stub
-		return 0;
+		return sStrength;
 	}
 
 	@Override
-	public double getCompresionStrength() {
+	public double getCompressionStrength() {
 		// TODO Auto-generated method stub
-		return 0;
+		return cStrength;
 	}
 
 	@Override
-	public double getApathom() {
+	public double getApothem() {
 		// TODO Auto-generated method stub
-		return 0;
+		return apothem;
 	}
 
 	@Override
-	public double getArea() {
+	public double getArea()
+	{
 		// TODO Auto-generated method stub
-		return 0;
+		double degIF = (numSides - 2) * 180;
+		double degPA = degIF / numSides;
+		degPA /= 2;
+		double side = (2 * apothem)/ Math.tan(degPA);
+		return 0.5 * apothem * numSides * side;
 	}
 
 	@Override
@@ -53,6 +85,13 @@ public class N_Gon extends Bar
 	@Override
 	public double getLength() {
 		// TODO Auto-generated method stub
-		return 0;
+		return length;
 	}
+	
+	@Override
+	public String getName()
+	{
+		return name;
+	}
+
 }
