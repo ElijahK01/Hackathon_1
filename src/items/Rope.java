@@ -8,8 +8,12 @@ public class Rope extends Item{
 	private double compressionStrength = 0;
 	private double length;
 	
-	public Rope(int strandCount) {
-		
+	public Rope(int strandCount, double l, MaterialProperties m) {
+		density = m.getDensity();
+		tensileStrength = m.getTensileStrength();
+		shearStrength = m.getShearStrength();
+		compressionStrength = m.getShearStrength();
+		length = l;
 	}
 	
 	@Override
