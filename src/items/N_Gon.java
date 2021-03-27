@@ -2,40 +2,63 @@ package items;
 
 public class N_Gon extends Bar
 {
+	
+	public N_Gon(double a, double l, String n)
+	{
+		apothem = a;
+		length = l;
+		name = n;
+		//get material properties
+	}
+	
+	public N_Gon(double a, double l, double cs, double ss, double ts, double d)
+	{
+		apothem = a;
+		length = l;
+		cStrength = cs;
+		sStrength = ss;
+		tStrength = ts;
+		density = d;
+		//create material name
+	}
+	
 	@Override
 	public double getDensity() {
 		// TODO Auto-generated method stub
-		return 0;
+		return density;
 	}
 
 	@Override
 	public double getTensileStrength() {
 		// TODO Auto-generated method stub
-		return 0;
+		return tStrength;
 	}
 
 	@Override
 	public double getShearStrength() {
 		// TODO Auto-generated method stub
-		return 0;
+		return sStrength;
 	}
 
 	@Override
-	public double getCompresionStrength() {
+	public double getCompressionStrength() {
 		// TODO Auto-generated method stub
-		return 0;
+		return cStrength;
 	}
 
 	@Override
-	public double getApathom() {
+	public double getApothem() {
 		// TODO Auto-generated method stub
-		return 0;
+		return apothem;
 	}
 
 	@Override
-	public double getArea() {
+	public double getArea()
+	{
 		// TODO Auto-generated method stub
-		return 0;
+		double PI = 3.14159265;
+		double a = apothem * apothem * PI;
+		return a;
 	}
 
 	@Override
@@ -53,6 +76,13 @@ public class N_Gon extends Bar
 	@Override
 	public double getLength() {
 		// TODO Auto-generated method stub
-		return 0;
+		return length;
 	}
+	
+	@Override
+	public String getName()
+	{
+		return name;
+	}
+
 }

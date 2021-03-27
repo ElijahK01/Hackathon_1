@@ -14,6 +14,7 @@ public abstract class Item implements Material
 	public double cStrength;
 	public double sStrength;
 	public double tStrength;
+	//public String name;
 	
 	public abstract double getLength();
 }
