@@ -8,6 +8,10 @@ public class Rope extends Item{
 	private double compressionStrength = 0;
 	private double length;
 	
+	public Rope(int strandCount) {
+		
+	}
+	
 	@Override
 	public double getDensity() {
 		// TODO Auto-generated method stub
