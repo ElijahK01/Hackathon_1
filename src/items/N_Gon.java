@@ -1,5 +1,6 @@
 package items;
 
-public class N_Gon extends Bar{
+public class N_Gon extends Bar
+{
 
 }

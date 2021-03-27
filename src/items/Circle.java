@@ -1,5 +1,6 @@
 package items;
 
-public class Circle extends Bar{
-
+public class Circle extends Bar
+{
+	
 }
