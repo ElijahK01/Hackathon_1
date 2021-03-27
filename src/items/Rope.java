@@ -56,7 +56,7 @@ public class Rope extends Item{
 	}
 
 	@Override
-	public double getCompresionStrength() {
+	public double getCompressionStrength() {
 		// TODO Auto-generated method stub
 		return compressionStrength;
 	}
@@ -88,6 +88,12 @@ public class Rope extends Item{
 	public double getLength() 
 	{
 		return length;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
