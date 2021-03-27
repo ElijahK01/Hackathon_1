@@ -10,6 +10,10 @@ public abstract class Item implements Material
 	
 	//length of the material
 	private double length;
+	private double density;
+	private double tensionStrength;
+	private double sStrength;
+	private double tensileStrength;
 	
 	public abstract double getLength();
 }
