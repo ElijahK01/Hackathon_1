@@ -2,13 +2,15 @@ package items;
 
 public class MaterialProperties implements Material{
 	
+	private String name;
 	private double density;
 	private double tensileStrength;
 	private double shearStrength;
 	private double compressionStrength;
 	
-	public MaterialProperties(double d, double ts, double ss, double cs)
+	public MaterialProperties(String n, double d, double ts, double ss, double cs)
 	{
+		name = n;
 		density = d;
 		tensileStrength = ts;
 		shearStrength = ss;
@@ -40,6 +42,10 @@ public class MaterialProperties implements Material{
 	@Override
 	public double getCompresionStrength() {
 		return compressionStrength;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 }
