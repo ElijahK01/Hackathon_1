@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -17,6 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import root.fileIO;
 
 public class SetupWindow extends Application
 {
@@ -26,21 +28,28 @@ public class SetupWindow extends Application
 	{
 		
 		ArrayList<MaterialProperties> mp = new ArrayList<>();
-		ArrayList<String> materialNames = new ArrayList<>();
 		
 		// transfer material properties name to material names list
 		
+		mp = fileIO.getAll();
+		String[] materialNames = new String[mp.size()];
+		
+		for(int i = 0; i < mp.size(); i ++) {
+			materialNames[i] = mp.get(i).getName();
+		}
 		
 		// buttons and labels
 		Button saveCustom = new Button("Save Custom");
 		Button run = new Button("Run Simulation");
 		
-		RadioButton createCustom = new RadioButton("Create Custom Material");
+		//RadioButton createCustom = new RadioButton("Create Custom Material");
 		
 		
-		//ChoiceDialog materialsList = new ChoiceDialog(materialNames.toArray()[0], materialNames.toArray()); 
+		ChoiceDialog materialsList = new ChoiceDialog(materialNames[0], materialNames); 
+		
 		
 		// =================== form to create new material ====================== //
+		
 		
 		TextField nameInput = new TextField();
 		TextField densityInput = new TextField();
@@ -73,10 +82,8 @@ public class SetupWindow extends Application
 		sStrength.getChildren().addAll(sStrengthLabel, sStrengthInput);
 		cStrength.getChildren().addAll(cStrengthLabel, cStrengthInput);
 		
-		// ============================== End of Form ======================= //
-		
 		StackPane containerPane = new StackPane();
-		containerPane.getChildren().add(createCustom);
+		//containerPane.getChildren().add(createCustom);
 		
 		FlowPane customMaterialCreation = new FlowPane(javafx.geometry.Orientation.VERTICAL);
 		customMaterialCreation.getChildren().add(name);
@@ -86,22 +93,38 @@ public class SetupWindow extends Application
 		customMaterialCreation.getChildren().add(cStrength);
 		customMaterialCreation.getChildren().add(saveCustom);
 		
-		customMaterialCreation.setAlignment(javafx.geometry.Pos.TOP_RIGHT);
 		
+		
+		// ============================== End of Form ======================= //
+		
+		
+		// ============================== Preset selection ======================== //
+		
+		
+		
+		
+		// ========================== End of Preset Selection ===================== //
+		
+		
+		// ========================== Run options ========================== //
+		
+		
+		
+		// ========================== End of Run Options =================== //
 		
 		
 		// scene settings
-		Pane radioPane = new Pane();
-		HBox customButtonContainer = new HBox();
-		customButtonContainer.getChildren().addAll(createCustom);
-		radioPane.getChildren().add(customButtonContainer);
-		customButtonContainer.setAlignment(javafx.geometry.Pos.TOP_RIGHT);
-		radioPane.setVisible(true);
+//		Pane radioPane = new Pane();
+//		HBox customButtonContainer = new HBox();
+//		customButtonContainer.getChildren().addAll(createCustom);
+//		radioPane.getChildren().add(customButtonContainer);
+//		customButtonContainer.setAlignment(javafx.geometry.Pos.TOP_RIGHT);
+//		radioPane.setVisible(true);
 		
 		containerPane.getChildren().add(customMaterialCreation);
-		containerPane.getChildren().add(radioPane);
+		//containerPane.getChildren().add(radioPane);
 		
-		customMaterialCreation.setVisible(false);
+		customMaterialCreation.setVisible(true);
 		
 		containerPane.setVisible(true);
 		
@@ -116,9 +139,9 @@ public class SetupWindow extends Application
 
 			@Override
 			public void handle(MouseEvent event) {
-				if(event.getSource() == createCustom) {
-					updateFormVisibility();
-				}
+				//if(event.getSource() == createCustom) {
+				//	updateFormVisibility();
+				//}
 				if(event.getSource() == saveCustom) {
 					
 					// reference save method
@@ -135,7 +158,7 @@ public class SetupWindow extends Application
 			
 		};
 		
-		createCustom.setOnMouseClicked(handler);
+		saveCustom.setOnMouseClicked(handler);
 		
 		
 	}
