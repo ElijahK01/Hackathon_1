@@ -30,6 +30,7 @@ public class SetupWindow extends Application
 		
 		// transfer material properties name to material names list
 		
+		
 		// buttons and labels
 		Button saveCustom = new Button("Save Custom");
 		Button run = new Button("Run Simulation");

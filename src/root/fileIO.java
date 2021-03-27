@@ -57,6 +57,10 @@ public class fileIO
 		return m;
 	}
 	
+	public ArrayList<MaterialProperties> getAll(){
+		return null;
+	}
+	
 	public void write(MaterialProperties m)
 	{
 		
