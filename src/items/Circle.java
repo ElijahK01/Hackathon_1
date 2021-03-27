@@ -3,10 +3,14 @@ package items;
 //<<<<<<< HEAD
 public class Circle extends Bar
 {
+	public Circle()
+	{
+		
+	}
 	@Override
 	public double getDensity() {
 		// TODO Auto-generated method stub
-		return 0;
+		return density;
 	}
 
 	@Override
@@ -22,7 +26,7 @@ public class Circle extends Bar
 	}
 
 	@Override
-	public double getTensionStrength() {
+	public double getCompresionStrength() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

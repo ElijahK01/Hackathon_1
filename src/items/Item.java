@@ -9,11 +9,11 @@ public abstract class Item implements Material
 	public abstract void display();
 	
 	//length of the material
-	private double length;
-	private double density;
-	private double tensionStrength;
-	private double sStrength;
-	private double tensileStrength;
+	public double length;
+	public double density;
+	public double cStrength;
+	public double sStrength;
+	public double tStrength;
 	
 	public abstract double getLength();
 }

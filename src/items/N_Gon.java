@@ -21,7 +21,7 @@ public class N_Gon extends Bar
 	}
 
 	@Override
-	public double getTensionStrength() {
+	public double getCompresionStrength() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
