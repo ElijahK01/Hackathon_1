@@ -57,7 +57,9 @@ public class fileIO
 		return m;
 	}
 	
-	public ArrayList<MaterialProperties> getAll(){
+	public static ArrayList<MaterialProperties> getAll()
+	{
+		
 		return null;
 	}
 	
