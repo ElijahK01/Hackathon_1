@@ -7,7 +7,7 @@ import items.*;
 public class fileIO
 {
 	//file location, can be changed 
-	static String fname = "C:\\Users\\schei\\Documents\\College\\Hackathon\\Mat.txt";
+	static String fname = "Mat.txt";
 	
 	public static MaterialProperties getMaterial(String name) throws Exception
 	{
