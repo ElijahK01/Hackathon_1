@@ -5,23 +5,27 @@ public class Circle extends Bar
 {
 	//private String name;
 	
-	public Circle(double r, double l, String n)
+	public Circle()
 	{
-		apothem = r;
-		length = l;
-		name = n;
+		apothem = 1;
+		length = 10;
+		density = 1;
+		cStrength = 1;
+		sStrength = 1;
+		tStrength = 1;
+		name = "Unknown Material";
 		//get material properties
 	}
 	
-	public Circle(double r, double l, double cs, double ss, double ts, double d)
+	public Circle(double r, double l, MaterialProperties prop)
 	{
 		apothem = r;
 		length = l;
-		cStrength = cs;
-		sStrength = ss;
-		tStrength = ts;
-		density = d;
-		//create material name
+		cStrength = prop.getCompressionStrength();
+		sStrength = prop.getShearStrength();
+		tStrength = prop.getTensileStrength();
+		density = prop.getDensity();
+		name = prop.getName();
 	}
 	
 	@Override

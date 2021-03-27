@@ -2,24 +2,31 @@ package items;
 
 public class N_Gon extends Bar
 {
+	private int numSides;
 	
-	public N_Gon(double a, double l, String n)
+	public N_Gon()
 	{
-		apothem = a;
-		length = l;
-		name = n;
+		apothem = 1;
+		length = 10;
+		density = 1;
+		numSides = 4;
+		cStrength = 1;
+		sStrength = 1;
+		tStrength = 1;
+		name = "Unknown Material";
 		//get material properties
 	}
 	
-	public N_Gon(double a, double l, double cs, double ss, double ts, double d)
+	public N_Gon(double r, double l, int nS, MaterialProperties prop)
 	{
-		apothem = a;
+		apothem = r;
 		length = l;
-		cStrength = cs;
-		sStrength = ss;
-		tStrength = ts;
-		density = d;
-		//create material name
+		numSides = nS;
+		cStrength = prop.getCompressionStrength();
+		sStrength = prop.getShearStrength();
+		tStrength = prop.getTensileStrength();
+		density = prop.getDensity();
+		name = prop.getName();
 	}
 	
 	@Override
@@ -56,9 +63,11 @@ public class N_Gon extends Bar
 	public double getArea()
 	{
 		// TODO Auto-generated method stub
-		double PI = 3.14159265;
-		double a = apothem * apothem * PI;
-		return a;
+		double degIF = (numSides - 2) * 180;
+		double degPA = degIF / numSides;
+		degPA /= 2;
+		double side = (2 * apothem)/ Math.tan(degPA);
+		return 0.5 * apothem * numSides * side;
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package items;
 
 public abstract class Bar extends Item 
 {
-	//apathom is the "radius" of a uniform shape
+	//apothem is the "radius" of a uniform shape
 	//equivalent to the radius of a circle
 	public double apothem;
 	
