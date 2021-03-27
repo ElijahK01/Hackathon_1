@@ -1,10 +1,18 @@
 package root;
 
-public class Main {
+public class Main implements Runnable{
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Main m = new Main();
+		Thread mainThread = new Thread(m);
+		
+		mainThread.run();
+	}
 
+	@Override
+	public void run() {
+		
+		
 	}
 
 }
