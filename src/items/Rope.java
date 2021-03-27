@@ -65,14 +65,15 @@ public class Rope extends Item{
 	public void update() {
 		int offset = 0;
 		for(int i = 0; i < strands.size(); i++) {
-			Strand s = strands.get(i);
+			int truePosition = i - offset;
+			Strand s = strands.get(truePosition);
 			double strandWidth = s.getDiameter();
 			
 			// force to each strand will change if implementing individual strand calculations
-			strands.get(i).setLoad(totalForce / strands.size());
+			strands.get(truePosition).setLoad(totalForce / strands.size());
 			
-			if (strands.get(i).snapped()) {
-				strands.remove(i);
+			if (strands.get(truePosition).snapped()) {
+				strands.remove(truePosition);
 				offset ++;
 			}
 		}
