@@ -6,8 +6,6 @@ membes:
 
 Date: 26th of March, 2021
 
-Purpose:
-
-Description:
-
-Features:
+Purpose: 
+Simulation for modeling material failure
+Project for the ACMW Hackathon at the University of Toledo 
