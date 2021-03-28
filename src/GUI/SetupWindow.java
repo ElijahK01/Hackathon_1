@@ -142,8 +142,8 @@ public class SetupWindow extends Application
 				//if(event.getSource() == createCustom) {
 				//	updateFormVisibility();
 				//}
-				System.out.println(densityInput.getText());
-				System.out.println(Integer.getInteger(densityInput.getText()));
+				//System.out.println(densityInput.getText());
+				//System.out.println(Integer.getInteger(densityInput.getText()));
 				if(event.getSource() == saveCustom) {
 					
 					try {
@@ -164,10 +164,10 @@ public class SetupWindow extends Application
 				
 				if(event.getSource() == run) {
 					
-					// reference save method
+					primaryStage.hide();
+					new SimWindow(new Stage());
 					
 				}
-				
 			}
 
 			private void updateFormVisibility() {

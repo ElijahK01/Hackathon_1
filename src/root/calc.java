@@ -24,4 +24,9 @@ public class calc
 		double f = getForce();
 		return f / r.getArea();
 	}
+	
+	public static double getForce() 
+	{
+		return 0;
+	}
 }
