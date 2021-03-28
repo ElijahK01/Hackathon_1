@@ -29,4 +29,12 @@ public class calc
 	{
 		return 0;
 	}
+
+	public static double simulateStress(MaterialProperties m, double forceApplied, double objectLength,
+			double forceLocation) {
+		
+		// calculate force as a percent of the maximum force bearable
+		
+		return 100.0;
+	}
 }

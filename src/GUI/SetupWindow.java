@@ -21,12 +21,12 @@ import root.fileIO;
 
 public class SetupWindow extends Application
 {
-
+	ArrayList<MaterialProperties> mp = new ArrayList<>();
 	@Override
 	public void start(Stage primaryStage) throws Exception 
 	{
 		
-		ArrayList<MaterialProperties> mp = new ArrayList<>();
+		
 		
 		// transfer material properties name to material names list
 		
@@ -164,8 +164,30 @@ public class SetupWindow extends Application
 				
 				if(event.getSource() == run) {
 					
+					MaterialProperties selected = null;
+					
+					try {
+					
+						Object materialSelection = materialsList.getValue();
+						String selection = materialSelection.toString();
+						
+						
+						
+						for(int i = 0; i < mp.size(); i ++ ) {
+							if(mp.get(i).getName() == materialSelection.toString())
+								selected = mp.get(i);
+						}
+					}
+					catch(Exception e) {
+
+					}
+					
 					primaryStage.hide();
-					new SimWindow(new Stage());
+					new SimWindow(new Stage(), nameInput.getText() == null ? selected : new MaterialProperties(nameInput.getText(), 
+							Double.parseDouble(densityInput.getText()), 
+							Double.parseDouble(tStrengthInput.getText()), 
+							Double.parseDouble(sStrengthInput.getText()), 
+							Double.parseDouble(cStrengthInput.getText())));
 					
 				}
 			}
