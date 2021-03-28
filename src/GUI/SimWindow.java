@@ -17,6 +17,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -61,18 +62,25 @@ public class SimWindow{
 		forceInput.setMinWidth(50);
 		lengthInput.setMinWidth(50);
 		forceXCoordinateInput.setMinWidth(50);
+		apothemInput.setMinWidth(50);
 		
 		Text forceLabel = new  Text("Force:       ");
 		Text lengthLabel = new Text("Length:      ");
 		Text fxcLabel = new    Text("Force offset:");
+		Text apothemLabel = new Text("Width:     ");
 		
 		HBox force = new HBox();
 		HBox length = new HBox();
 		HBox forceXCoordinate = new HBox();
+		HBox apothem = new HBox();
 		
 		force.getChildren().addAll(forceLabel, forceInput);
 		length.getChildren().addAll(lengthLabel, lengthInput);
 		forceXCoordinate.getChildren().addAll(fxcLabel, forceXCoordinateInput);
+		apothem.getChildren().addAll(apothemLabel, apothemInput);
+		
+		VBox heightWidth = new VBox();
+		heightWidth.getChildren().addAll(length, apothem);
 		
 		changeMaterial.setMinSize(120, 20);
 		apply.setMinSize(120, 20);
@@ -117,7 +125,7 @@ public class SimWindow{
 		bar.add(changeMaterial, 3, 1);
 		bar.add(apply, 3, 0);
 		bar.add(force, 0, 0);
-		bar.add(length, 0, 1);
+		bar.add(heightWidth, 0, 1);
 		bar.add(forceXCoordinate, 1, 0);
 		bar.add(forceOptions, 1, 1);
 		bar.add(shapeBox, 2, 0);
@@ -149,6 +157,7 @@ public class SimWindow{
 					double forceApplied = Double.parseDouble(forceInput.getText());
 					double objectLength = Double.parseDouble(lengthInput.getText());
 					double forceLocation = Double.parseDouble(forceXCoordinateInput.getText());
+					double apothemMeasurement = Double.parseDouble(apothemInput.getText());
 					int sideCount = 3;
 					
 					
@@ -171,7 +180,7 @@ public class SimWindow{
 					
 					double percentForce = 0.00;
 					
-					percentForce = calc.simulateStress(m, forceApplied, objectLength, forceLocation);
+					percentForce = calc.simulateStress(m, forceApplied, objectLength, forceLocation, apothemMeasurement, sideCount);
 					
 					Color stress = new Color(percentForce / 100 , 0.5, 0, 1);
 					gc.setFill(stress);

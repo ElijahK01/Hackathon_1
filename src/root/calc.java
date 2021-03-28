@@ -31,7 +31,7 @@ public class calc
 	}
 
 	public static double simulateStress(MaterialProperties m, double forceApplied, double objectLength,
-			double forceLocation) {
+			double forceLocation, double apothemMeasurement, int sideCount) {
 		
 		// calculate force as a percent of the maximum force bearable
 		
