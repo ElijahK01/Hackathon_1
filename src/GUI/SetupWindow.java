@@ -25,7 +25,7 @@ public class SetupWindow extends Application
 	@Override
 	public void start(Stage primaryStage) throws Exception 
 	{
-		
+		Text presetLabel = new Text("To use a pre-set material: \n");
 		
 		
 		// transfer material properties name to material names list
@@ -49,7 +49,7 @@ public class SetupWindow extends Application
 		materialsList.getItems().addAll(materialNames);
 		
 		// =================== form to create new material ====================== //
-		
+		Text customMaterialLabel = new Text("To create a new material:\n");
 		
 		TextField nameInput = new TextField();
 		TextField densityInput = new TextField();
@@ -86,6 +86,7 @@ public class SetupWindow extends Application
 		//containerPane.getChildren().add(createCustom);
 		
 		FlowPane customMaterialCreation = new FlowPane(javafx.geometry.Orientation.VERTICAL);
+		customMaterialCreation.getChildren().add(customMaterialLabel);
 		customMaterialCreation.getChildren().add(name);
 		customMaterialCreation.getChildren().add(density);
 		customMaterialCreation.getChildren().add(tStrength);
@@ -100,6 +101,7 @@ public class SetupWindow extends Application
 		// ============================== Preset selection ======================== //
 		
 		FlowPane options = new FlowPane(javafx.geometry.Orientation.VERTICAL);
+		options.getChildren().add(presetLabel);
 		options.getChildren().addAll(materialsList);
 		options.getChildren().addAll(run);
 		// ========================== End of Preset Selection ===================== //

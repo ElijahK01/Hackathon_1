@@ -31,10 +31,23 @@ public class calc
 	}
 
 	public static double simulateStress(MaterialProperties m, double forceApplied, double objectLength,
-			double forceLocation, double apothemMeasurement, int sideCount) {
+			double forceLocation, double apothemMeasurement, int sideCount, boolean shear, double area) {
 		
+		double pMax = 100;
+		double pApplied = 1;
+		
+		if(shear) {
+			pMax = m.getShearStrength() * area;
+			pApplied = forceLocation * forceApplied;
+			
+		}
+		else {
+			pMax = m.getTensileStrength() * area;
+			pApplied = forceApplied / area;
+		}
 		// calculate force as a percent of the maximum force bearable
 		
-		return 100.0;
+		// shear is force applied * distance
+		return (pApplied/pMax) * 100;
 	}
 }

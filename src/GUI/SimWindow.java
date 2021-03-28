@@ -1,7 +1,9 @@
 package GUI;
 
 import items.Bar;
+import items.Circle;
 import items.MaterialProperties;
+import items.N_Gon;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -64,10 +66,10 @@ public class SimWindow{
 		forceXCoordinateInput.setMinWidth(50);
 		apothemInput.setMinWidth(50);
 		
-		Text forceLabel = new  Text("Force:       ");
-		Text lengthLabel = new Text("Length:      ");
-		Text fxcLabel = new    Text("Force offset:");
-		Text apothemLabel = new Text("Width:     ");
+		Text forceLabel = new  Text("Force (N):   ");
+		Text lengthLabel = new Text("Length (m):  ");
+		Text fxcLabel = new    Text("Force offset (m):");
+		Text apothemLabel = new Text("Width: (m)  ");
 		
 		HBox force = new HBox();
 		HBox length = new HBox();
@@ -94,7 +96,7 @@ public class SimWindow{
 		forceOptions.getChildren().add(pullForce);
 		
 		// choose shape
-		String[] shapes = {"Square", "Circular", "Rope", "Polygon"};
+		String[] shapes = {"Square", "Circular", "Polygon"};
 		ChoiceBox shape = new ChoiceBox();
 		shape.effectiveNodeOrientationProperty();
 		shape.getItems().addAll(shapes);
@@ -111,15 +113,15 @@ public class SimWindow{
 		nGonSides.getChildren().addAll(nGonSidesLabel, nGonSidesInput);
 		
 		// rope strands
-		HBox ropeStrands = new HBox();
-		Text ropeStrandsLabel = new Text("Strands (if rope):  ");
-		TextField ropeStrandsInput = new TextField();
-		ropeStrandsInput.setPrefWidth(50);
-		ropeStrands.getChildren().addAll(ropeStrandsLabel, ropeStrandsInput);
+		//HBox ropeStrands = new HBox();
+		//Text ropeStrandsLabel = new Text("Strands (if rope):  ");
+		//TextField ropeStrandsInput = new TextField();
+		//ropeStrandsInput.setPrefWidth(50);
+		//ropeStrands.getChildren().addAll(ropeStrandsLabel, ropeStrandsInput);
 		
 		// combine into one box
 		FlowPane sidesStrands = new FlowPane(javafx.geometry.Orientation.VERTICAL);
-		sidesStrands.getChildren().addAll(nGonSides, ropeStrands);
+		sidesStrands.getChildren().addAll(nGonSides/*, ropeStrands*/);
 
 		// assign item placement
 		bar.add(changeMaterial, 3, 1);
@@ -158,19 +160,31 @@ public class SimWindow{
 					double objectLength = Double.parseDouble(lengthInput.getText());
 					double forceLocation = Double.parseDouble(forceXCoordinateInput.getText());
 					double apothemMeasurement = Double.parseDouble(apothemInput.getText());
+					boolean shear = verticalForce.isSelected();
 					int sideCount = 3;
 					
+					double area = 0;
 					
 					//System.out.println(shape.getValue());
 					
 					if(shape.getValue() == null || shape.getValue() == "Polygon") {
 						sideCount = (int)Double.parseDouble(nGonSidesInput.getText());
 						sideCount = (sideCount > 2 ? sideCount : 3);
+						N_Gon n = new N_Gon(apothemMeasurement, objectLength, sideCount, m);
+						area = n.getArea();
 					}
 					else if(shape.getValue() == "Square") {
 						sideCount = 4;
+						N_Gon n = new N_Gon(apothemMeasurement, objectLength, sideCount, m);
+						area = n.getArea();
+					}
+					else {
+						Circle c = new Circle(apothemMeasurement, objectLength, m);
+						area = c.getArea();
 					}
 					
+					gc.setFill(Color.BLUE);
+					gc.fillRect(0, 0, 700, 400);
 
 					boolean forceBoxChecked = endForce.isSelected();
 
@@ -180,16 +194,30 @@ public class SimWindow{
 					
 					double percentForce = 0.00;
 					
-					percentForce = calc.simulateStress(m, forceApplied, objectLength, forceLocation, apothemMeasurement, sideCount);
+					percentForce = calc.simulateStress(m, forceApplied, objectLength, forceLocation, apothemMeasurement, sideCount, shear, area);
+					
+					percentForce = (percentForce > 100? 100 : percentForce);
 					
 					Color stress = new Color(percentForce / 100 , 0.5, 0, 1);
+					
+					if (percentForce > 99.999999) {
+						stress = new Color(0,0,0,1);
+					}
+					
 					gc.setFill(stress);
-					gc.fillRect(100, 100, objectLength, 50);
+					gc.fillRect(100, 100, objectLength * 100, apothemMeasurement * 100);
 					
 					// draw arrow
 					double position = forceLocation + 45;
 					
-					drawArrow(gc, position);
+					if (shear) {
+						gc.setFill(Color.RED);
+						drawArrow(gc, position);
+					}
+					else {
+						gc.setFill(Color.RED);
+						drawSideArrow(gc, objectLength);
+					}
 					
 					
 	
@@ -202,12 +230,20 @@ public class SimWindow{
 
 			}
 
+			private void drawSideArrow(GraphicsContext gc, double objectLength) {
+				gc.setFill(Color.RED);
+				gc.fillRect(objectLength + 75, 50, 50, 10);
+				double location = objectLength + 50;
+				
+				gc.fillPolygon((new double[] {objectLength + 75, objectLength + 75.0, objectLength + 50}),( new double[] {75, 75, 100}), 3);
+			}
+
 			private void drawArrow(GraphicsContext gc, double position) {
 				gc.setFill(Color.RED);
-				gc.fillRect(position + 50, 25, 10, 50);
-				double location = position + 50;
+				gc.fillRect((position * 100) + 50, 25, 10, 50);
+				double location = (position * 100) + 50;
 				
-				gc.fillPolygon((new double[] {location - 10.0, location + 20.0, location + 5.0}),( new double[] {75, 75, 100}), 3);
+				gc.fillPolygon((new double[] {position - 10.0, position + 20.0, position + 5.0}),( new double[] {75, 75, 100}), 3);
 				
 			}
 		};
