@@ -1,5 +1,6 @@
 package GUI;
 
+import items.Bar;
 import items.MaterialProperties;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -19,6 +20,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import root.Main;
 import root.calc;
 
 public class SimWindow{
@@ -45,6 +47,7 @@ public class SimWindow{
 		// Buttons 
 		Button changeMaterial = new Button("Change Material");
 		Button apply = new Button("Apply Changes");
+		changeMaterial.setDisable(true); // not set up
 		
 		RadioButton verticalForce = new RadioButton("Shear");
 		RadioButton pullForce = new RadioButton("Pull");
@@ -53,6 +56,7 @@ public class SimWindow{
 		TextField forceInput = new TextField();
 		TextField lengthInput = new TextField();
 		TextField forceXCoordinateInput = new TextField();
+		TextField apothemInput = new TextField();
 		
 		forceInput.setMinWidth(50);
 		lengthInput.setMinWidth(50);
@@ -82,7 +86,7 @@ public class SimWindow{
 		forceOptions.getChildren().add(pullForce);
 		
 		// choose shape
-		String[] shapes = {"Rectangle", "Circular", "Rope", "Polygon"};
+		String[] shapes = {"Square", "Circular", "Rope", "Polygon"};
 		ChoiceBox shape = new ChoiceBox();
 		shape.effectiveNodeOrientationProperty();
 		shape.getItems().addAll(shapes);
@@ -145,6 +149,19 @@ public class SimWindow{
 					double forceApplied = Double.parseDouble(forceInput.getText());
 					double objectLength = Double.parseDouble(lengthInput.getText());
 					double forceLocation = Double.parseDouble(forceXCoordinateInput.getText());
+					int sideCount = 3;
+					
+					
+					//System.out.println(shape.getValue());
+					
+					if(shape.getValue() == null || shape.getValue() == "Polygon") {
+						sideCount = (int)Double.parseDouble(nGonSidesInput.getText());
+						sideCount = (sideCount > 2 ? sideCount : 3);
+					}
+					else if(shape.getValue() == "Square") {
+						sideCount = 4;
+					}
+					
 
 					boolean forceBoxChecked = endForce.isSelected();
 
@@ -158,22 +175,31 @@ public class SimWindow{
 					
 					Color stress = new Color(percentForce / 100 , 0.5, 0, 1);
 					gc.setFill(stress);
-					gc.fillRect(100, 100, 300, 50);
+					gc.fillRect(100, 100, objectLength, 50);
 					
 					// draw arrow
+					double position = forceLocation + 45;
 					
-					gc.setFill(Color.RED);
-					gc.fillRect(forceLocation + 50, 200, 10, 50);
-					double location = forceLocation + 50;
+					drawArrow(gc, position);
 					
-					gc.fillPolygon((new double[] {location - 10.0, location + 20.0, location + 5.0}),( new double[] {250, 250, 270}), 3);
+					
 	
 				}
 				
 				if(event.getSource() == changeMaterial) {
 					System.out.println("YoU dOnT lIkE tHiS mAtEriAL");
+					//new Main();
 				}
 
+			}
+
+			private void drawArrow(GraphicsContext gc, double position) {
+				gc.setFill(Color.RED);
+				gc.fillRect(position + 50, 25, 10, 50);
+				double location = position + 50;
+				
+				gc.fillPolygon((new double[] {location - 10.0, location + 20.0, location + 5.0}),( new double[] {75, 75, 100}), 3);
+				
 			}
 		};
 		
