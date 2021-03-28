@@ -7,6 +7,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
@@ -38,11 +40,14 @@ public class SimWindow{
 		bar.getColumnConstraints().add(new ColumnConstraints(150));
 		bar.getColumnConstraints().add(new ColumnConstraints(150));
 		bar.getColumnConstraints().add(new ColumnConstraints(150));
-		bar.getRowConstraints().add(new RowConstraints(50));
+		bar.getRowConstraints().add(new RowConstraints(30));
 		
 		// Buttons 
 		Button changeMaterial = new Button("Change Material");
 		Button apply = new Button("Apply Changes");
+		
+		RadioButton verticalForce = new RadioButton("Shear");
+		RadioButton pullForce = new RadioButton("Pull");
 		
 		// text fields
 		TextField forceInput = new TextField();
@@ -71,15 +76,48 @@ public class SimWindow{
 		// checkbox
 		
 		CheckBox endForce = new CheckBox(" <- Apply F to end");
+		FlowPane forceOptions = new FlowPane(javafx.geometry.Orientation.VERTICAL);
+		forceOptions.getChildren().add(endForce);
+		forceOptions.getChildren().add(verticalForce);
+		forceOptions.getChildren().add(pullForce);
 		
+		// choose shape
+		String[] shapes = {"Rectangle", "Circular", "Rope", "Polygon"};
+		ChoiceBox shape = new ChoiceBox();
+		shape.effectiveNodeOrientationProperty();
+		shape.getItems().addAll(shapes);
 		
+		Text shapeLabel = new Text("Shape of bar: ");
+		HBox shapeBox = new HBox();
+		shapeBox.getChildren().addAll(shapeLabel, shape);
+		
+		// n-gon sides 
+		HBox nGonSides = new HBox();
+		Text nGonSidesLabel = new Text("Sides (if polygon):");
+		TextField nGonSidesInput = new TextField();
+		nGonSidesInput.setPrefWidth(50);
+		nGonSides.getChildren().addAll(nGonSidesLabel, nGonSidesInput);
+		
+		// rope strands
+		HBox ropeStrands = new HBox();
+		Text ropeStrandsLabel = new Text("Strands (if rope):  ");
+		TextField ropeStrandsInput = new TextField();
+		ropeStrandsInput.setPrefWidth(50);
+		ropeStrands.getChildren().addAll(ropeStrandsLabel, ropeStrandsInput);
+		
+		// combine into one box
+		FlowPane sidesStrands = new FlowPane(javafx.geometry.Orientation.VERTICAL);
+		sidesStrands.getChildren().addAll(nGonSides, ropeStrands);
+
 		// assign item placement
 		bar.add(changeMaterial, 3, 1);
 		bar.add(apply, 3, 0);
 		bar.add(force, 0, 0);
 		bar.add(length, 0, 1);
 		bar.add(forceXCoordinate, 1, 0);
-		bar.add(endForce, 1, 1);
+		bar.add(forceOptions, 1, 1);
+		bar.add(shapeBox, 2, 0);
+		bar.add(sidesStrands, 2, 1);
 		
 		// location assignments
 		

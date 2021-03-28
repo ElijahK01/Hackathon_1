@@ -1,6 +1,5 @@
 package items;
 
-//<<<<<<< HEAD
 public class Circle extends Bar
 {
 	//private String name;
