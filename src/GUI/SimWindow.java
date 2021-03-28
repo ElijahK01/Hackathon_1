@@ -207,7 +207,7 @@ public class SimWindow{
 					gc.fillRect(100, 100, objectLength * 100, apothemMeasurement * 100);
 					
 					// draw arrow
-					double position = forceLocation + 45;
+					double position = forceLocation;
 					
 					if (shear) {
 						gc.setFill(Color.RED);
@@ -223,7 +223,7 @@ public class SimWindow{
 				}
 				
 				if(event.getSource() == changeMaterial) {
-					System.out.println("YoU dOnT lIkE tHiS mAtEriAL");
+					//System.out.println("YoU dOnT lIkE tHiS mAtEriAL");
 					//new Main();
 				}
 
@@ -240,11 +240,11 @@ public class SimWindow{
 
 			private void drawArrow(GraphicsContext gc, double position) {
 				gc.setFill(Color.RED);
-				gc.fillRect((position * 100) + 50, 25, 10, 50);
+				//gc.fillRect((position * 100) + 50, 25, 10, 50);
 				@SuppressWarnings("unused")
-				double location = (position * 100) + 50;
+				double location = (position * 100) + 95;
 				
-				gc.fillPolygon((new double[] {position - 10.0, position + 20.0, position + 5.0}),( new double[] {75, 75, 100}), 3);
+				gc.fillPolygon((new double[] {location - 10.0, location + 20.0, location + 5.0}),(new double[] {75, 75, 100}), 3);
 				
 			}
 		};
