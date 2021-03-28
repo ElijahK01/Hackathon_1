@@ -183,7 +183,7 @@ public class SetupWindow extends Application
 					}
 					
 					primaryStage.hide();
-					new SimWindow(new Stage(), nameInput.getText() == null ? selected : new MaterialProperties(nameInput.getText(), 
+					new SimWindow(new Stage(), selected != null ? selected : new MaterialProperties(nameInput.getText(), 
 							Double.parseDouble(densityInput.getText()), 
 							Double.parseDouble(tStrengthInput.getText()), 
 							Double.parseDouble(sStrengthInput.getText()), 
@@ -191,13 +191,6 @@ public class SetupWindow extends Application
 					
 				}
 			}
-
-			private void updateFormVisibility() {
-				customMaterialCreation.setVisible(true);
-				
-			}
-
-			
 		};
 		
 		saveCustom.setOnMouseClicked(handler);
