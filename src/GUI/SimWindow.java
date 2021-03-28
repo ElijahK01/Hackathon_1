@@ -1,6 +1,5 @@
 package GUI;
 
-import items.Bar;
 import items.Circle;
 import items.MaterialProperties;
 import items.N_Gon;
@@ -23,7 +22,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import root.Main;
 import root.calc;
 
 public class SimWindow{
@@ -138,7 +136,7 @@ public class SimWindow{
 		
 		bar.setAlignment(javafx.geometry.Pos.BASELINE_CENTER);
 		
-		// final child labor assignments
+		// final child assignments
 		
 		FlowPane master = new FlowPane(javafx.geometry.Orientation.VERTICAL);
 		master.getChildren().add(c);

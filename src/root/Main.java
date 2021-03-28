@@ -1,6 +1,15 @@
 package root;
 import  GUI.*;
 
+/*
+ * Project for ACMW Hackathon - University of Toledo, 3/28/2021
+ * 
+ * Team Members:
+ *  	- Elijah Karl   --- Frsheman, CSE
+ * 		- Andrew Scheid --- Senior, CSE
+ * 
+ */
+
 public class Main implements Runnable{
 
 
@@ -13,6 +22,7 @@ public class Main implements Runnable{
 	}
 
 
+	@Override
 	public void run() {
 		javafx.application.Application.launch(SetupWindow.class);
 	}

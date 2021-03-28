@@ -44,6 +44,7 @@ public class MaterialProperties implements Material{
 		return compressionStrength;
 	}
 	
+	@Override
 	public String getName() {
 		return name;
 	}
