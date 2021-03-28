@@ -112,7 +112,7 @@ public class fileIO
 		return all;
 	}
 	
-	public void write(MaterialProperties m) throws Exception
+	public static void write(MaterialProperties m) throws Exception
 	{
 		try {
 	         File file = new File(fname);

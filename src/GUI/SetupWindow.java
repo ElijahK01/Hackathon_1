@@ -1,20 +1,19 @@
 package GUI;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import items.MaterialProperties;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -44,9 +43,10 @@ public class SetupWindow extends Application
 		
 		//RadioButton createCustom = new RadioButton("Create Custom Material");
 		
-		
-		ChoiceDialog materialsList = new ChoiceDialog(materialNames[0], materialNames); 
-		
+		System.out.println(materialNames[0]);
+		ChoiceBox materialsList = new ChoiceBox(); 
+		materialsList.effectiveNodeOrientationProperty();
+		materialsList.getItems().addAll(materialNames);
 		
 		// =================== form to create new material ====================== //
 		
@@ -94,15 +94,14 @@ public class SetupWindow extends Application
 		customMaterialCreation.getChildren().add(saveCustom);
 		
 		
-		
 		// ============================== End of Form ======================= //
 		
 		
 		// ============================== Preset selection ======================== //
 		
-		
-		
-		
+		FlowPane options = new FlowPane(javafx.geometry.Orientation.VERTICAL);
+		options.getChildren().addAll(materialsList);
+		options.getChildren().addAll(run);
 		// ========================== End of Preset Selection ===================== //
 		
 		
@@ -121,7 +120,8 @@ public class SetupWindow extends Application
 //		customButtonContainer.setAlignment(javafx.geometry.Pos.TOP_RIGHT);
 //		radioPane.setVisible(true);
 		
-		containerPane.getChildren().add(customMaterialCreation);
+		customMaterialCreation.getChildren().add(options);
+		containerPane.getChildren().addAll(customMaterialCreation);
 		//containerPane.getChildren().add(radioPane);
 		
 		customMaterialCreation.setVisible(true);
@@ -144,6 +144,18 @@ public class SetupWindow extends Application
 				//}
 				if(event.getSource() == saveCustom) {
 					
+					
+					try {
+						fileIO.write(new MaterialProperties());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+				if(event.getSource() == run) {
+					
 					// reference save method
 					
 				}
@@ -159,7 +171,7 @@ public class SetupWindow extends Application
 		};
 		
 		saveCustom.setOnMouseClicked(handler);
-		
+		run.setOnMouseClicked(handler);
 		
 	}
 }
