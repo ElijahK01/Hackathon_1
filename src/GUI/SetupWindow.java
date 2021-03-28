@@ -142,11 +142,19 @@ public class SetupWindow extends Application
 				//if(event.getSource() == createCustom) {
 				//	updateFormVisibility();
 				//}
+				System.out.println(densityInput.getText());
+				System.out.println(Integer.getInteger(densityInput.getText()));
 				if(event.getSource() == saveCustom) {
 					
-					
 					try {
-						fileIO.write(new MaterialProperties());
+						
+						fileIO.write(new MaterialProperties(nameInput.getText(), 
+															Double.parseDouble(densityInput.getText()), 
+															Double.parseDouble(tStrengthInput.getText()), 
+															Double.parseDouble(sStrengthInput.getText()), 
+															Double.parseDouble(cStrengthInput.getText())));
+															
+						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
