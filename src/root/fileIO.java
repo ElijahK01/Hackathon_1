@@ -117,7 +117,7 @@ public class fileIO
 		try {
 	         File file = new File(fname);
 	        
-	         FileWriter fw = new FileWriter(file.getAbsoluteFile());
+	         FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
 	         BufferedWriter bw = new BufferedWriter(fw);
 	         
 	         String s = "\n" + m.getName() + " " + m.getDensity() + " " + m.getTensileStrength() +
