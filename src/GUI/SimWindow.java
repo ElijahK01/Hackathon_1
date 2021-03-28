@@ -28,6 +28,7 @@ import root.calc;
 
 public class SimWindow{
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public SimWindow(Stage sim, MaterialProperties m) {
 		System.out.println("Success");
 		
@@ -233,6 +234,7 @@ public class SimWindow{
 			private void drawSideArrow(GraphicsContext gc, double objectLength) {
 				gc.setFill(Color.RED);
 				gc.fillRect(objectLength + 75, 50, 50, 10);
+				@SuppressWarnings("unused")
 				double location = objectLength + 50;
 				
 				gc.fillPolygon((new double[] {objectLength + 75, objectLength + 75.0, objectLength + 50}),( new double[] {75, 75, 100}), 3);
@@ -241,6 +243,7 @@ public class SimWindow{
 			private void drawArrow(GraphicsContext gc, double position) {
 				gc.setFill(Color.RED);
 				gc.fillRect((position * 100) + 50, 25, 10, 50);
+				@SuppressWarnings("unused")
 				double location = (position * 100) + 50;
 				
 				gc.fillPolygon((new double[] {position - 10.0, position + 20.0, position + 5.0}),( new double[] {75, 75, 100}), 3);

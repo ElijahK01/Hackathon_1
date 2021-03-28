@@ -74,6 +74,7 @@ public class Rope extends Item{
 		for(int i = 0; i < strands.size(); i++) {
 			int truePosition = i - offset;
 			Strand s = strands.get(truePosition);
+			@SuppressWarnings("unused")
 			double strandWidth = s.getDiameter();
 			
 			// force to each strand will change if implementing individual strand calculations

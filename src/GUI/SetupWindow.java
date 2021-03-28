@@ -1,12 +1,10 @@
 package GUI;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import items.MaterialProperties;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -22,6 +20,7 @@ import root.fileIO;
 public class SetupWindow extends Application
 {
 	ArrayList<MaterialProperties> mp = new ArrayList<>();
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void start(Stage primaryStage) throws Exception 
 	{
@@ -171,18 +170,14 @@ public class SetupWindow extends Application
 					try {
 					
 						Object materialSelection = materialsList.getValue();
-						String selection = materialSelection.toString();
-						
-						
-						
+						//String selection = materialSelection.toString();
+
 						for(int i = 0; i < mp.size(); i ++ ) {
 							if(mp.get(i).getName() == materialSelection.toString())
 								selected = mp.get(i);
 						}
 					}
-					catch(Exception e) {
-
-					}
+					catch(Exception e) {}
 					
 					primaryStage.hide();
 					new SimWindow(new Stage(), selected != null ? selected : new MaterialProperties(nameInput.getText(), 
